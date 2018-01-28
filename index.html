@@ -319,7 +319,7 @@
                 <i class="icon-location-user"></i>
               </div>
 
-              <h3 class="stat-count">3</h3>
+              <h3 class="stat-count state-playerCount">-</h3>
 
               <h5 class="stat-title">
 								累计用户
@@ -334,7 +334,7 @@
                 <i class="icon-organization-hierarchy-3"></i>
               </div>
 
-              <h3 class="stat-count">3</h3>
+              <h3 class="stat-count state-groupCount">-</h3>
 
               <h5 class="stat-title">
 								团组织数
@@ -349,7 +349,7 @@
                 <i class="icon-user-chat-1"></i>
               </div>
 
-              <h3 class="stat-count">254</h3>
+              <h3 class="stat-count state-chatLogCount">-</h3>
 
               <h5 class="stat-title">
                 累计信息
@@ -364,7 +364,7 @@
                 <i class="icon-server-2"></i>
               </div>
 
-              <h3 class="stat-count">300</h3>
+              <h3 class="stat-count state-diceLogCount">-</h3>
 
               <h5 class="stat-title">
                 累计投骰
@@ -379,7 +379,7 @@
                 <i class="icon-download-computer"></i>
               </div>
 
-              <h3 class="stat-count">1</h3>
+              <h3 class="stat-count state-downloadTimes">-</h3>
 
               <h5 class="stat-title">
 								累计下载
@@ -394,10 +394,10 @@
                 <i class="icon-hourglass"></i>
               </div>
 
-              <h3 class="stat-count">7200</h3>
+              <h3 class="stat-count state-serverRunTime">-</h3>
 
               <h5 class="stat-title">
-								服务器运行时间
+								服务器运行时间(天)
 							</h5>
 
             </div>
@@ -734,7 +734,42 @@
   <script src="js/jquery-2.1.3.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
+  <script>
+  $.getJSON('http://180.76.145.64:23256/stat', function(data) {
+    $('#stats .state-playerCount').text(data.playerCount);
+    $('#stats .state-groupCount').text(data.groupCount);
+    $('#stats .state-chatLogCount').text(data.chatLogCount);
+    $('#stats .state-diceLogCount').text(data.diceLogCount);
+    $('#stats .state-downloadTimes').text(data.downloadTimes);
+    $('#stats .state-serverRunTime').text(Math.ceil(data.serverRunTime/24/60/60));
 
+    var statSection = $("#stats"),
+        stats = $(".stat-count");
+
+    statSection.waypoint({
+    	handler: function(direction) {
+       	if (direction === "down") {
+          stats.each(function () {
+            var $this = $(this);
+
+            $({ Counter: 0 }).animate({ Counter: $this.text() }, {
+              duration: 4000,
+              easing: 'swing',
+              step: function (curValue) {
+                $this.text(Math.ceil(curValue));
+              }
+            });
+          });
+
+        }
+
+        // trigger once only
+        this.destroy();
+   		},
+   		offset: "90%"
+   	});
+  })
+  </script>
 </body>
 
 </html>

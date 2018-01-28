@@ -1,7 +1,7 @@
 /* ===================================================================
  * Elevate - Main JS
  *
- * ------------------------------------------------------------------- */ 
+ * ------------------------------------------------------------------- */
 
 (function($) {
 
@@ -9,16 +9,16 @@
 
 	/* ------------------------------------------------------
 	 * Preloader and Intro Animations
-	 * ------------------------------------------------------ */ 	 
+	 * ------------------------------------------------------ */
    $(window).on('load', function() {
 
-      // will first fade out the loading animation 
+      // will first fade out the loading animation
     	$("#loader").fadeOut("slow", function(){
 
         // will fade out the whole DIV that covers the website.
         $("#preloader").delay(300).fadeOut("slow");
 
-      }); 
+      });
 
       // intro section animation
      	if (!$("html").hasClass('no-cssanimations')) {
@@ -39,36 +39,36 @@
 					}, ctr * 100);
 
 				});
-					
+
 			}, 1000);
-     	}   	   	
+     	}
 
   	});
 
 
 	/* ------------------------------------------------------
 	 * Hide Logo
-	 * ------------------------------------------------------ */ 	 
+	 * ------------------------------------------------------ */
    $(window).on('scroll', function() {
 
 		var y = $(window).scrollTop(),
 		    siteHeader = $('header'),
 		    siteLogo = siteHeader.find('.logo'),
-		    triggerHeight = siteHeader.innerHeight();		
-     
+		    triggerHeight = siteHeader.innerHeight();
+
 	   if (y > triggerHeight) {
-	      siteLogo.fadeOut();	     
+	      siteLogo.fadeOut();
 	   }
       else {
          siteLogo.fadeIn();
       }
-    
+
 	});
 
 
 	/* ------------------------------------------------------
 	 * Fitvids
-	 * ------------------------------------------------------ */ 	
+	 * ------------------------------------------------------ */
   	$(".fluid-video-wrapper").fitVids();
 
 
@@ -81,7 +81,7 @@
 	   	namespace: "flex-",
 	      controlsContainer: ".flexslider-controls",
 	      animation: "fade",
-		  	manualControls: ".flex-control-nav li",	     
+		  	manualControls: ".flex-control-nav li",
 	      controlNav: true,
 	      directionNav: false,
 	      smoothHeight: true,
@@ -91,8 +91,8 @@
 	      touch: true,
 	      useCSS: false, // Chrome fix
 	      start: function(slider){
-			   $(slider).trigger('resize');  	
-			}			
+			   $(slider).trigger('resize');
+			}
 	   });
 
    });
@@ -113,12 +113,12 @@
 
 		toggleButton.toggleClass('is-clicked');
 		siteBody.toggleClass('menu-is-open').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-			// firefox transitions break when parent overflow is changed, 
+			// firefox transitions break when parent overflow is changed,
 			// so we need to wait for the end of the trasition to give the body an overflow hidden
 			siteBody.toggleClass('overflow-hidden');
 		});
-			
-		// check if transitions are not supported 
+
+		// check if transitions are not supported
 		if ($('html').hasClass('no-csstransitions')) {
 			 siteBody.toggleClass('overflow-hidden');
 		}
@@ -134,7 +134,7 @@
 			siteBody.removeClass('menu-is-open').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
 				siteBody.removeClass('overflow-hidden');
 			});
-			
+
 			// check if transitions are not supported
 			if ($('html').hasClass('no-csstransitions')) {
 				 siteBody.removeClass('overflow-hidden');
@@ -147,43 +147,43 @@
 	/* ------------------------------------------------------
 	 * Stat Counter
 	 * ------------------------------------------------------ */
-   var statSection = $("#stats"),
-       stats = $(".stat-count");
-
-   statSection.waypoint({
-
-   	handler: function(direction) {
-
-      	if (direction === "down") {       		
-
-			   stats.each(function () {
-				   var $this = $(this);
-
-				   $({ Counter: 0 }).animate({ Counter: $this.text() }, {
-				   	duration: 4000,
-				   	easing: 'swing',
-				   	step: function (curValue) {
-				      	$this.text(Math.ceil(curValue));
-				    	}
-				  	});
-				});
-
-       	} 
-
-       	// trigger once only
-       	this.destroy();  
-
-		},			
-		offset: "90%"
-	
-	});
+  //  var statSection = $("#stats"),
+  //      stats = $(".stat-count");
+  //
+  //  statSection.waypoint({
+  //
+  //  	handler: function(direction) {
+  //
+  //     	if (direction === "down") {
+  //
+	// 		   stats.each(function () {
+	// 			   var $this = $(this);
+  //
+	// 			   $({ Counter: 0 }).animate({ Counter: $this.text() }, {
+	// 			   	duration: 4000,
+	// 			   	easing: 'swing',
+	// 			   	step: function (curValue) {
+	// 			      	$this.text(Math.ceil(curValue));
+	// 			    	}
+	// 			  	});
+	// 			});
+  //
+  //      	}
+  //
+  //      	// trigger once only
+  //      	this.destroy();
+  //
+	// 	},
+	// 	offset: "90%"
+  //
+	// });
 
 
   /* ------------------------------------------------------
 	* Highlight the current section in the navigation bar
 	* ------------------------------------------------------ */
 	var sections = $("section"),
-	navigationLinks = $("#menu-nav-wrap .nav-list a");	
+	navigationLinks = $("#menu-nav-wrap .nav-list a");
 
 	sections.waypoint( {
 
@@ -195,7 +195,7 @@
 
 			if (direction === "up") activeSection = activeSection.prev();
 
-			var activeLink = $('#menu-nav-wrap .nav-list a[href="#' + activeSection.attr("id") + '"]');			
+			var activeLink = $('#menu-nav-wrap .nav-list a[href="#' + activeSection.attr("id") + '"]');
 
          navigationLinks.parent().removeClass("current");
 			activeLink.parent().addClass("current");
@@ -209,7 +209,7 @@
 	* Smooth Scrolling
 	* ------------------------------------------------------ */
   	$('.smoothscroll').on('click', function (e) {
-	 	
+
 	 	e.preventDefault();
 
    	var target = this.hash,
@@ -233,7 +233,7 @@
   /* ------------------------------------------------------
 	* Placeholder Plugin Settings
 	* ------------------------------------------------------ */
-	$('input, textarea, select').placeholder()  
+	$('input, textarea, select').placeholder()
 
 
   /* ------------------------------------------------------
@@ -269,7 +269,7 @@
 	  3: '<i class="fa fa-warning"></i> E-mail address is not valid.',
 	  4: '<i class="fa fa-warning"></i> E-mail address is not valid.',
 	  5: '<i class="fa fa-warning"></i> E-mail address is not valid.'
-	} 
+	}
 
 
 	/* ------------------------------------------------------
@@ -304,19 +304,19 @@
 							}, ctr * 50);
 
 						});
-							
+
 					}, 500);
 
 				}
 
 				// trigger once only
-       		this.destroy();  
+       		this.destroy();
 
-			}, 
+			},
 			offset: '95%'
 
-		}); 
-	} 
+		});
+	}
 
   /* ------------------------------------------------------
 	* Back to Top
@@ -325,7 +325,7 @@
 	    fadeInTime = 400,  // how slow/fast you want the button to show
 	    fadeOutTime = 400, // how slow/fast you want the button to hide
        scrollSpeed = 300, // how slow/fast you want the button to scroll to top. can be a value, 'slow', 'normal' or 'fast'
-       goTopButton = $("#go-top") 
+       goTopButton = $("#go-top")
 
 	// Show or hide the sticky footer button
 	$(window).on('scroll', function() {
@@ -337,6 +337,6 @@
 		}
 
 	});
- 
+
 
 })(jQuery);
